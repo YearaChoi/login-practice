@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const signUp = async (id, pw, name, email) => {
+export const signUp = async (username, password, name, email) => {
   try {
     const result = await axios.post(
       "https://ll-api.jungsub.com/ptrack/user/signup",
       {
-        id,
-        pw,
+        username,
+        password,
         name,
         email,
       },

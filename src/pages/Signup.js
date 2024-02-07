@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   //커스텀 hook import해서 사용한 경우
-  const [id, onChangeId] = useForm();
-  const [pw, onChangePw] = useForm();
+  const [username, onChangeUsername] = useForm();
+  const [password, onChangePassword] = useForm();
   const [name, onChangeName] = useForm();
   const [email, onChangeEmail] = useForm();
 
@@ -17,7 +17,7 @@ const Signup = () => {
 
   //sign up 버튼에 대한 onClick
   const onClick = async () => {
-    await signUp(id, pw, name, email);
+    await signUp(username, password, name, email);
     router("/");
   };
 
@@ -25,12 +25,16 @@ const Signup = () => {
     <Wrapper>
       <Title>회원가입</Title>
       <Inputs>
-        <Input placeholder="아이디" value={id} onChange={onChangeId} />
+        <Input
+          placeholder="아이디"
+          value={username}
+          onChange={onChangeUsername}
+        />
         <Input
           placeholder="비밀번호"
           type="password"
-          value={pw}
-          onChange={onChangePw}
+          value={password}
+          onChange={onChangePassword}
         />
         <Input placeholder="이름" value={name} onChange={onChangeName} />
         <Input placeholder="이메일" value={email} onChange={onChangeEmail} />
