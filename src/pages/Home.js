@@ -19,19 +19,23 @@ const Home = () => {
   };
 
   const onClick = async () => {
-    //위에 선언한 id, pw를 넘겨줌
-    const result = await login(id, pw);
-    console.log(result);
+    try {
+      //위에 선언한 id, pw를 넘겨줌
+      const result = await login(id, pw);
+      // console.log(result);
 
-    // const { accessToken, refreshToken } = result;
-    // localStorage.setItem("access", accessToken);
-    // localStorage.setItem("refresh", refreshToken);
+      // const { accessToken, refreshToken } = result;
+      // localStorage.setItem("access", accessToken);
+      // localStorage.setItem("refresh", refreshToken);
 
-    const { uid } = result;
-    //받아온 uid를 localstorage에 저장
-    localStorage.setItem("uid", uid);
-    //라우터를 통해 마이페이지로 보냄
-    router("/mypage");
+      const { uid } = result;
+      //받아온 uid를 localstorage에 저장
+      localStorage.setItem("uid", uid);
+      //라우터를 통해 마이페이지로 보냄
+      router("/mypage");
+    } catch (error) {
+      console.error("Login error", error);
+    }
   };
 
   return (

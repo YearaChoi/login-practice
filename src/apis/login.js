@@ -16,7 +16,8 @@ export const login = async (id, pw) => {
         },
       }
     );
-    //uid처럼 data안에 data가 들어가 있는 형태(?) 잘 모르겠음..
+
+    //서버 응답 모두 반환
     return result.data;
   } catch (error) {
     // 에러가 발생시 콘솔에 에러를 출력하고 빈 객체를 반환하거나 에러 처리 수행
