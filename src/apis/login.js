@@ -1,14 +1,14 @@
 import axios from "axios";
 //axios사용 async로 해 줌
 //로그인 함수를 위해 id, pw를 받아옴
-export const login = async (id, pw) => {
+export const login = async (username, password) => {
   try {
     //로그인 처리
     const result = await axios.post(
       "https://ll-api.jungsub.com/ptrack/user/login",
       {
-        id,
-        pw,
+        username,
+        password,
       },
       {
         headers: {

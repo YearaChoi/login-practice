@@ -6,22 +6,22 @@ import { login } from "../apis/login";
 
 const Home = () => {
   //input에 맞는 state와 onChange함수
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   //로그인 처리가 끝날 경우 다음 페이지로 넘어가도록
   const router = useNavigate();
 
   const onChangeId = (e) => {
-    setId(e.target.value);
+    setUsername(e.target.value);
   };
   const onChangePw = (e) => {
-    setPw(e.target.value);
+    setPassword(e.target.value);
   };
 
   const onClick = async () => {
     try {
       //위에 선언한 id, pw를 넘겨줌
-      const result = await login(id, pw);
+      const result = await login(username, password);
       // console.log(result);
 
       // const { accessToken, refreshToken } = result;
@@ -43,11 +43,11 @@ const Home = () => {
       <Title>로그인하기</Title>
       <Form>
         <Inputs>
-          <Input placeholder="아이디" value={id} onChange={onChangeId} />
+          <Input placeholder="아이디" value={username} onChange={onChangeId} />
           <Input
             placeholder="비밀번호"
             type="password"
-            value={pw}
+            value={password}
             onChange={onChangePw}
           />
         </Inputs>
