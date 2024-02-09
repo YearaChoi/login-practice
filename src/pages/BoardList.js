@@ -47,7 +47,6 @@ const Mypage = () => {
         <Wrapper key={post._id}>
           <div>{post.uid.name}</div>
           <div>{post.title}</div>
-          <div>{post.body}</div>
           <div>{post.createdAt}</div>
         </Wrapper>
       ))}

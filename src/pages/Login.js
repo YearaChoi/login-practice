@@ -32,7 +32,7 @@ const Home = () => {
       //받아온 uid를 localstorage에 저장
       localStorage.setItem("uid", uid);
       //라우터를 통해 마이페이지로 보냄
-      router("/mypage");
+      router("/boardlist");
     } catch (error) {
       console.error("Login error", error);
     }
