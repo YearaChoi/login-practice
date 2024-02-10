@@ -1,8 +1,8 @@
 import axios from "axios";
-//일단보류
+
 export const getMypage = async () => {
   const access = localStorage.getItem("access");
-  //전체 게시글 조회
+  //전체 게시글 리스트 조회
   const result = await axios.get("https://ll-api.jungsub.com/ptrack/post", {
     headers: {
       Authorization: access,

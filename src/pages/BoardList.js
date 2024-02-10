@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getMypage } from "../apis/mypage";
 import styled from "styled-components";
 import { Title } from "../components/Common";
+import { Link } from "react-router-dom";
 
 const Mypage = () => {
   //가져온 데이터를 꺼내주기 위함
@@ -46,7 +47,7 @@ const Mypage = () => {
         //매핑하는 요소인 Wrapper에 key prop을 설정
         <Wrapper key={post._id}>
           <div>{post.uid.name}</div>
-          <div>{post.title}</div>
+          <Link to={`/boardlist/${post._id}`}>{post.title}</Link>
           <div>{post.createdAt}</div>
         </Wrapper>
       ))}
