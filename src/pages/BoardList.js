@@ -9,6 +9,8 @@ const Mypage = () => {
   const [data, setData] = useState([]);
   //로딩화면 구현
   const [loading, setLoading] = useState(true);
+  //search 구현
+  const [search, setSearch] = useState("");
   // 마이페이지는 이동했을 때 api를 한번만 찾아야함 useEffect사용
   useEffect(() => {
     //마이페이지(전체게시판) 정보 불러오기
@@ -40,17 +42,35 @@ const Mypage = () => {
       <Title>
         <div>전체 게시글 조회 게시판</div>
         <div>글의 제목을 누르면 특정 게시글로 이동합니다..</div>
+        <input
+          type="text"
+          placeholder="게시글 찾기"
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </Title>
 
-      {data.map((post) => (
-        //React에서 리스트를 렌더링할 때 각 항목에 고유한 키를 제공해야 함
-        //매핑하는 요소인 Wrapper에 key prop을 설정
-        <Wrapper key={post._id}>
-          <div>{post.uid.name}</div>
-          <Link to={`/boardlist/${post._id}`}>{post.title}</Link>
-          <div>{post.createdAt}</div>
-        </Wrapper>
-      ))}
+      {data
+        .filter((post) => {
+          if (search === "") {
+            return true; // 검색어가 없으면 모든 게시글을 보여줌
+          } else {
+            const searchLowerCase = search.toLowerCase();
+            // 게시글 제목 또는 유저 이름에 검색어가 포함되어 있는 경우에만 보여줌
+            return (
+              post.title.toLowerCase().includes(searchLowerCase) ||
+              post.uid.name.toLowerCase().includes(searchLowerCase)
+            );
+          }
+        })
+        .map((post) => (
+          //React에서 리스트를 렌더링할 때 각 항목에 고유한 키를 제공해야 함
+          //매핑하는 요소인 Wrapper에 key prop을 설정
+          <Wrapper key={post._id}>
+            <div>{post.uid.name}</div>
+            <Link to={`/boardlist/${post._id}`}>{post.title}</Link>
+            <div>{post.createdAt}</div>
+          </Wrapper>
+        ))}
     </div>
   );
 };
