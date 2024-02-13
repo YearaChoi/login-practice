@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getPostDetail } from "../apis/boardDetail";
+import { deletePost } from "../apis/deletePost";
 
 function BoardDetail() {
   //훅을 사용하여 URL에서 게시물의 ID를 가져옴
   const { id } = useParams();
+  // useNavigate 훅에서 navigate 함수를 가져옴
+  const navigate = useNavigate();
   //훅을 사용하여 detailData 상태를 초기화. 이 상태는 게시물의 세부 정보를 저장.
   const [detailData, setDetailData] = useState(null);
 
@@ -22,6 +25,19 @@ function BoardDetail() {
     fetchData();
   }, [id]);
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("게시글을 삭제하시겠습니까?");
+    if (confirmDelete) {
+      try {
+        console.log(id, detailData.uid.uid._id);
+        await deletePost(id, detailData.uid.uid._id); // 게시글 ID와 작성자 UID를 함께 전달
+        navigate("/boardlist");
+      } catch (error) {
+        console.error("게시글 삭제 오류:", error);
+      }
+    }
+  };
+
   // detailData가 null인 경우 로딩 중을 나타내는 <div>Loading...</div>이 렌더링.
   // 그렇지 않은 경우, 게시물의 세부 정보가 화면에 렌더링.
   if (detailData === null) return <div>Loading...</div>;
@@ -33,7 +49,7 @@ function BoardDetail() {
       <button>
         <Link to={`/update/${id}`}>수정</Link>
       </button>
-      <button>삭제</button>
+      <button onClick={handleDelete}>삭제</button>
       <h2>제목: {detailData.uid.title}</h2>
       <p>날짜: {detailData.uid.createdAt}</p>
       <p>작성자: {detailData.uid.uid.name}</p>
