@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getPostDetail } from "../apis/boardDetail";
 
 function BoardDetail() {
@@ -30,6 +30,10 @@ function BoardDetail() {
     // 중요! 백엔드에서 반환된 데이터 구조를 고려하여 detailData내의 정확한 필드에 접근해야함.
     <div>
       <h1>게시물 세부정보</h1>
+      <button>
+        <Link to={`/update/${id}`}>수정</Link>
+      </button>
+      <button>삭제</button>
       <h2>제목: {detailData.uid.title}</h2>
       <p>날짜: {detailData.uid.createdAt}</p>
       <p>작성자: {detailData.uid.uid.name}</p>
