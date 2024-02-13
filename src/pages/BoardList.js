@@ -23,16 +23,6 @@ const Mypage = () => {
 
   //setData에 바로 값을 넣어주기 전에 console에 api로부터 데이터를 잘 받아오는지 확인!
 
-  // useEffect(() => {
-  //   //마이페이지(전체게시판) 정보 불러오기
-  //   getMypage().then((res) => {
-  //     //객체가 데이터에 들어가게 됨
-  //     console.log(res);
-  //     //데이터를 받아올 경우 로딩 중지
-  //     setLoading(false);
-  //   });
-  // }, []);
-
   if (loading) return <div>로딩중...</div>;
 
   //데이터의 초기값은 undefined
@@ -47,6 +37,9 @@ const Mypage = () => {
           placeholder="게시글 찾기"
           onChange={(e) => setSearch(e.target.value)}
         />
+        <button>
+          <Link to="/create">게시글 생성하기</Link>
+        </button>
       </Title>
 
       {data
